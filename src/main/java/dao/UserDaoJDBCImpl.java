@@ -4,6 +4,7 @@ import model.User;
 import util.Util;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -18,7 +19,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
 
     }
@@ -29,13 +30,29 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
+        String sql = "INSERT INTO user(name, lastName, age) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setByte(3, age);
+            preparedStatement.executeUpdate();
+            connection.commit();
+            System.out.println("user с именем:" + name + " " + lastName + " добавлен в базу данных");
 
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException error) {
+                throw new RuntimeException(error);
+            }
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
