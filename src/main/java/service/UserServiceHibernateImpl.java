@@ -1,14 +1,14 @@
 package service;
 
 import dao.UserDao;
-import dao.UserDaoJDBCImpl;
+import dao.UserDaoHibernateImpl;
 import model.User;
 
 import java.util.List;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceHibernateImpl implements UserService {
 
-    private final UserDao userDao = new UserDaoJDBCImpl();
+    private final UserDao userDao = new UserDaoHibernateImpl();
 
     @Override
     public void createUsersTable() {
@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void cleanUsersTable() {
-    userDao.cleanUsersTable();
+        userDao.cleanUsersTable();
     }
 }
+

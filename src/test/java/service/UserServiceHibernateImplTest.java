@@ -7,9 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserServiceImplTest {
+class UserServiceHibernateImplTest {
 
-    private final UserService userService = new UserServiceImpl();
+
+    private final UserService userService = new UserServiceHibernateImpl();
 
     private final String testName = "Ivan";
     private final String testLastName = "Ivanov";
@@ -95,4 +96,6 @@ class UserServiceImplTest {
             fail("Не корректная работа очистки пользователей в таблице\n" + e.getMessage());
         }
     }
+
+
 }

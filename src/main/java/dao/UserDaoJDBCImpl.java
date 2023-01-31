@@ -13,7 +13,6 @@ public class UserDaoJDBCImpl implements UserDao {
     @Override
     public void createUsersTable() {
         String sql = "CREATE TABLE IF NOT EXISTS user(id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(50), lastName VARCHAR(50), age TINYINT(3))";
-
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
