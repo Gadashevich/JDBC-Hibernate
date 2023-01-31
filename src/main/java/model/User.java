@@ -1,22 +1,18 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level=AccessLevel.PRIVATE)
 public class User {
-    private Long id;
-    private String name;
-    private String lastName;
-    private Byte age;
-
-    public User() {
-    }
-
+     Long id;
+     String name;
+     String lastName;
+     Byte age;
 
 }
